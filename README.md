@@ -29,14 +29,14 @@ This package uses the following codes and data produced by 3rd parties:
 
 3.	lgwt.m,		  see [link](https://www.mathworks.com/matlabcentral/fileexchange/4540-legendre-gauss-quadrature-weights-and-nodes).
 
-4.	ReadMRC.m,		  see [link](https://github.com/nogaleslab/FreeHand/blob/master/ReadMRC.m)
+4.	ReadMRC.m,		  see [link](https://github.com/nogaleslab/FreeHand/blob/master/ReadMRC.m).
 
-5.	spherequad.m,		  see [link](https://people.sc.fsu.edu/~jburkardt/m_src/sphere_quad/sphere_quad.html)
+5.	spherequad.m,		  see [link](https://people.sc.fsu.edu/~jburkardt/m_src/sphere_quad/sphere_quad.html).
 
-6.	wignerD.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fe5a37c32-4a80-11e4-9553-005056977bd0%2Fdea46a4f-38b6-68b6-2990-f52999540413%2Ffiles%2FwignerD.m&embed=web)
+6.	wignerD.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fe5a37c32-4a80-11e4-9553-005056977bd0%2Fdea46a4f-38b6-68b6-2990-f52999540413%2Ffiles%2FwignerD.m&embed=web).
 
-7.	WriteMRC.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fch.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fe56f34df-4a80-11e4-9553-005056977bd0%2Fe5f1844b-3976-4384-be1d-b237e1f44f1c%2Ffiles%2FEMIODist2%2FWriteMRC.m&embed=web)
+7.	WriteMRC.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fch.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fe56f34df-4a80-11e4-9553-005056977bd0%2Fe5f1844b-3976-4384-be1d-b237e1f44f1c%2Ffiles%2FEMIODist2%2FWriteMRC.m&embed=web).
 
-8.	WriteMRCHeader.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fnl.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fsubmissions%2F50091%2Fversions%2F3%2Fcontents%2FUtils%2FwriteMRCHeader.m&embed=web)
+8.	WriteMRCHeader.m,		  see [link](https://viewer.mathworks.com/?viewer=plain_code&url=https%3A%2F%2Fnl.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fsubmissions%2F50091%2Fversions%2F3%2Fcontents%2FUtils%2FwriteMRCHeader.m&embed=web).
 
-9.	precomputed quadrature rules,		  see [link](https://www-user.tu-chemnitz.de/~potts/workgroup/graef/quadrature/index.php.en)
+9.	precomputed quadrature rules,		  see [link](https://www-user.tu-chemnitz.de/~potts/workgroup/graef/quadrature/index.php.en).
