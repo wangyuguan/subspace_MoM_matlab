@@ -20,7 +20,8 @@ For a reproduction of the figures in the paper, see "plot_against_L/" and "plot_
 
 This package uses the following softwares produced by 3rd parties:
 1.	ASPIRE package, see https://github.com/PrincetonUniversity/aspire. 
-2.	Manopt, see https://www.manopt.org.  
+2.	Manopt, see https://www.manopt.org.
+3.	FINUFFT, see https://finufft.readthedocs.io/en/latest/. 
 
 This package uses the following codes and data produced by 3rd parties:
 1.	besselzero.m,		  see	[link](https://github.com/jinwar/matnoise/blob/master/besselzero.m).
