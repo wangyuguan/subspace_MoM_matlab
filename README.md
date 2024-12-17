@@ -13,5 +13,3 @@ Matlab code.
 ### Usage:
 
 A simple example that can be completed in a few hours is available via "simple_example/run_test.m", after installing the following third party packages and downloading the following third party codes and data to "thirdparty/" folder.  
-
-For a reproduction of the figures in the paper, see "plot_against_L/" folder.
