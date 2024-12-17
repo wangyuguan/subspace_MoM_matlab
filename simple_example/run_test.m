@@ -10,7 +10,7 @@ addpath ~/finufft/matlab
 N = 1e4; % sample size 
 SNR = 1; % signal-to-noise ratil 
 n = 64; % size of downsampled images 
-use_precomputed_moments = true;
+use_precomputed_moments = false;
 
 rng(1)
 V = double(ReadMRC('emd_34948.map'));
