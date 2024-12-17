@@ -20,7 +20,7 @@ This package uses the following softwares produced by 3rd parties:
 
 ### Usage:
 
-A simple example of reconstrucing a smooth volume that can be completed in a few hours is available via "simple_example/run_test.m". 
+A simple example of reconstrucing a smooth volume using noisy images that can be completed in a few hours is available via "simple_example/run_test.m". 
 
 
 
