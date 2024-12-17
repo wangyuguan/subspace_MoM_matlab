@@ -1,7 +1,7 @@
 clear 
 clc 
 
-
+% test 
 
 addpath(genpath('../src'))
 addpath ~/finufft/matlab
