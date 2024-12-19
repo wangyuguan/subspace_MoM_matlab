@@ -173,7 +173,7 @@ V3_1e6{3} = V3_aligned;
 res3_1e6(3) = get_fsc(V,V3_aligned,pixel_size);
 
 
-save('new_result_N_1e6.mat','V3_1e6','res3_1e6','V2_1e6','res2_1e6')
+save('result_N_1e6.mat','V3_1e6','res3_1e6','V2_1e6','res2_1e6')
 
 
 
