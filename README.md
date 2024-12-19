@@ -21,6 +21,7 @@ This package uses the following softwares produced by 3rd parties:
 ### Usage:
 
 A simple example of reconstrucing a smooth volume using noisy images that can be completed in a few hours is available via "simple_example/run_test.m". 
+For a reproduction of the results in the paper, see "/plot_against_N_SNR" and "/plot_against_L". 
 
 
 
