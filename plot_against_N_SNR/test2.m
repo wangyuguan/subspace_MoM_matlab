@@ -40,7 +40,7 @@ V3_1e5 = cell(1,3);
 
 
 %%
-load('new_result_N_1e5_SNR_1.mat', 'out')
+load('result_N_1e5_SNR_1.mat', 'out')
 
 x2 = out.x2;
 V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
@@ -101,7 +101,7 @@ V3_1e5{3} = V3_aligned;
 res3_1e5(3) = get_fsc(V,V3_aligned,pixel_size);
 
 
-save('new_result_N_1e5.mat','V3_1e5','res3_1e5','V2_1e5','res2_1e5')
+save('result_N_1e5.mat','V3_1e5','res3_1e5','V2_1e5','res2_1e5')
 
 
 
@@ -113,7 +113,7 @@ res3_1e6 = zeros(1,3);
 V3_1e6 = cell(1,3);
 
 %%
-load('new_result_N_1e6_SNR_1.mat', 'out')
+load('result_N_1e6_SNR_1.mat', 'out')
 
 x2 = out.x2;
 V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
@@ -133,7 +133,7 @@ res3_1e6(1) = get_fsc(V,V3_aligned,pixel_size);
 
 
 %%
-load('new_result_N_1e6_SNR_0.1.mat', 'out')
+load('result_N_1e6_SNR_0.1.mat', 'out')
 
 x2 = out.x2;
 V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
@@ -153,7 +153,7 @@ res3_1e6(2) = get_fsc(V,V3_aligned,pixel_size);
 
 
 %%
-load('new_result_N_1e6_SNR_0.01.mat', 'out')
+load('result_N_1e6_SNR_0.01.mat', 'out')
 
 x2 = out.x2;
 V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
