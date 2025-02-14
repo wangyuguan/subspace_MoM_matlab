@@ -23,7 +23,7 @@ for l=0:L
     cl = sqrt(2/c^3)./abs(sphbes(l, zl, true));
     f_l = sphbes(l, r*zl/c, false);
     f_l = f_l*diag(cl); 
-    f_l(r>c) = 0;
+    f_l(r>c,:) = 0;
     f_l_precomputed{l+1}=f_l; 
     Y_l_precomputed{l+1} = sph_harmonics(l, th, phi);
 end

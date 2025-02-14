@@ -8,7 +8,7 @@ addpath('/home/yuguanw/Dropbox/code/finufft/matlab')
 
 
 N = 1e4; % sample size 
-SNR = 1; % signal-to-noise ratil 
+SNR = 1; % signal-to-noise ratio
 n = 64; % size of downsampled images 
 use_precomputed_moments = false;
 
@@ -17,9 +17,6 @@ V = double(ReadMRC('emd_34948.map'));
 V = V/norm(V(:));
 D = size(V,1);
 V_ds = vol_downsample(V, n);
-load('vol.mat')
-V_ds = double(vol);
-size(V_ds)
 % use a smooth approximation as ground truth 
 L = 5; % truncation parameters 
 c = 0.5;
@@ -41,19 +38,19 @@ for i=1:n_vMF
 end
 w = ones(1,n_vMF)/n_vMF;
 view_coef = vMF_t_rot_coef(mus,w,k,P);
-% Rots = reject_sampling_wigner(N, view_coef, P, 5);
+Rots = reject_sampling_wigner(N, view_coef, P, 5);
 
 
 
 %% form estimated moments 
-params.s2 = 150;
-params.s3 = 50;
-params.r2_max = 150 ;
-params.r3_max = 50 ;
+params.s2 = 300;
+params.s3 = 100;
+params.r2_max = 300 ;
+params.r3_max = 100 ;
 params.tol2 = 1e-8;
 params.tol3 = 1e-6;
 params.sigma = 0;
-% params.nstd = get_estimated_std(V, SNR);
+params.nstd = get_estimated_std(V, SNR);
 params.augsize = 5;
 if use_precomputed_moments==true 
     load('out.mat','out')
@@ -62,9 +59,9 @@ else
     params.L = L;
     params.S = S;
     params.P = P;
-    params.sampling_size = 150;
-    % out = form_estimated_moments(V, n, Rots, params);
-    out =  coeffs_t_subspace_MoMs(vol_coef, view_coef, params);
+    params.sampling_size = 300;
+    out = form_estimated_moments(V, n, Rots, params);
+    % out =  coeffs_t_subspace_MoMs(vol_coef, view_coef, params);
 end
 m1 = out.m1;
 m2 = out.m2;
@@ -74,41 +71,41 @@ size(m1)
 size(m2)
 size(m3)
 
-% %% visualize SNR 
-% figure 
-% imagesc(sum(V,3))
-% colormap('gray')
-% set(gcf, 'PaperPositionMode', 'auto');
-% fig = gcf;
-% fig_pos = fig.PaperPosition;
-% fig.PaperSize = [fig_pos(3) fig_pos(4)];
-% print(gcf, 'clean_image.pdf', '-dpdf', '-fillpage')
+%% visualize SNR 
+figure 
+imagesc(sum(V,3))
+colormap('gray')
+set(gcf, 'PaperPositionMode', 'auto');
+fig = gcf;
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+print(gcf, 'clean_image.pdf', '-dpdf', '-fillpage')
 
 
-% figure
-% imagesc(sum(V,3)+randn(D,D)*params.nstd)
-% colormap('gray')
-% set(gcf, 'PaperPositionMode', 'auto');
-% fig = gcf;
-% fig_pos = fig.PaperPosition;
-% fig.PaperSize = [fig_pos(3) fig_pos(4)];
-% print(gcf, 'noisy_image.pdf', '-dpdf', '-fillpage')
+figure
+imagesc(sum(V,3)+randn(D,D)*params.nstd)
+colormap('gray')
+set(gcf, 'PaperPositionMode', 'auto');
+fig = gcf;
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+print(gcf, 'noisy_image.pdf', '-dpdf', '-fillpage')
 
 
 
-%% optimization parameters 
+% optimization parameters 
 l1 = 1/norm(m1(:))^2;
 l2 = 1/norm(m2(:))^2;
 l3 = 1/norm(m3(:))^2;
 
- 
+
 SO3_rules.m2 = get_SO3_rule(L,P,2,0);
 SO3_rules.m3 = get_SO3_rule(L,P,3,0);
-% precomputation
+precomputation
 [Phi_lms_nodes_MoMs, Psi_MoMs] = do_precomputations(L, S, P, out, n, c, SO3_rules);
 
 
-%% stage one optimization 
+% stage one optimization 
 options = optimoptions('fmincon','Algorithm','sqp','Display','iter', ...
     'SpecifyObjectiveGradient',true,...
     'StepTolerance',1e-6,'FunctionTolerance',1e-6,'StepTolerance',1e-6,...
@@ -130,7 +127,7 @@ for i=1:N_rep
     xcost_M2(i) = xcost;
 end
 
-%% stage two optimization 
+% stage two optimization 
 options = optimoptions('fmincon','Algorithm','sqp','Display','iter', ...
     'SpecifyObjectiveGradient',true,...
     'StepTolerance',5e-6,'FunctionTolerance',5e-6,'StepTolerance',5e-6,...
@@ -141,26 +138,26 @@ x2 = x2_all{i};
 fun = @(x) find_cost_grad(x, m1, m2, m3, l1, l2, l3, Phi_lms_nodes_MoMs, Psi_MoMs, SO3_rules);
 x3 = fmincon(fun,x2,A,b,[],[],[],[],[],options);
 
-%% get resolutions 
-% run('~/aspire/initpath.m')
-% circ_mask = get_circ_mask(n);
-% V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
-% V2 = circ_mask.*V2;
-% V2 = imgaussfilt3(V2,1);
-% [~,~,V2_aligned,~]=cryo_align_densities(V_ds,V2);
+% get resolutions 
+run('~/aspire/initpath.m')
+circ_mask = get_circ_mask(n);
+V2 = vol_coeffs_t_vol(x2(1:N_basis), n, c, L, S, 1);
+V2 = circ_mask.*V2;
+V2 = imgaussfilt3(V2,1);
+[~,~,V2_aligned,~]=cryo_align_densities(V_ds,V2);
 
-% V3 = vol_coeffs_t_vol(x3(1:N_basis), n, c, L, S, 1);
-% V3 = circ_mask.*V3;
-% V3 = imgaussfilt3(V3,1);
-% [~,~,V3_aligned,~]=cryo_align_densities(V_ds,V3);
+V3 = vol_coeffs_t_vol(x3(1:N_basis), n, c, L, S, 1);
+V3 = circ_mask.*V3;
+V3 = imgaussfilt3(V3,1);
+[~,~,V3_aligned,~]=cryo_align_densities(V_ds,V3);
 
-% figure 
-% [res2, res3] = get_fsc2(V_ds,V2_aligned,V3_aligned,1.04*D/n);
-% set(gcf, 'PaperPositionMode', 'auto');
-% fig = gcf;
-% fig_pos = fig.PaperPosition;
-% fig.PaperSize = [fig_pos(3) fig_pos(4)];
-% print(gcf, 'FSC.pdf', '-dpdf', '-fillpage')
-% WriteMRC(V_ds,1,'V_ds.mrc')
-% WriteMRC(V2_aligned,1,'V2.mrc')
-% WriteMRC(V3_aligned,1,'V3.mrc')
+figure 
+[res2, res3] = get_fsc2(V_ds,V2_aligned,V3_aligned,1.04*D/n);
+set(gcf, 'PaperPositionMode', 'auto');
+fig = gcf;
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+print(gcf, 'FSC.pdf', '-dpdf', '-fillpage')
+WriteMRC(V_ds,1,'V_ds.mrc')
+WriteMRC(V2_aligned,1,'V2.mrc')
+WriteMRC(V3_aligned,1,'V3.mrc')
