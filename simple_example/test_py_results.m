@@ -13,9 +13,9 @@ addpath('../../finufft/matlab/')
 n = 64; % size of downsampled images 
 % use_precomputed_moments = false;
 
-load('vol.mat')
-load('vol_vec.mat')
-vol = double(vol);
+% load('vol.mat')
+% load('vol_vec.mat')
+% vol = double(vol);
 
 
 % rng(1)
@@ -26,20 +26,20 @@ vol = double(vol);
 % load('vol.mat')
 % V_ds = double(vol);
 
-L = 3; 
-c = 0.5;
+% L = 3; 
+% c = 0.5;
+% 
+% S = zeros(1,4);
+% S(1) = 31;
+% S(2) = 31;
+% S(3) = 31;
+% S(4) = 30;
 
-S = zeros(1,4);
-S(1) = 31;
-S(2) = 31;
-S(3) = 31;
-S(4) = 30;
 
 
-
-vol_coef = vol_t_vol_coeffs(vol, L, S, c, 0);
-load('vol_coef1.mat')
-norm(vol_coef(:)-vol_coef1(:))
+% vol_coef = vol_t_vol_coeffs(vol, L, S, c, 0);
+% load('vol_coef1.mat')
+% norm(vol_coef(:)-vol_coef1(:))
 
 
 
