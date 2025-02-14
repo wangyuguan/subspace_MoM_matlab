@@ -3,11 +3,11 @@ n = size(V,1);
 V = V(:);
 
 if mod(n,2)==0
-    x = 2*pi*((-n/2):(n/2-1)); 
+    x = ((-n/2):(n/2-1)); 
 else
-    x = 2*pi*((-(n-1)/2):((n-1)/2)); 
+    x = ((-(n-1)/2):((n-1)/2)); 
 end
-
+x = 2*pi*x;
 
 
 % standard dft grids 
@@ -24,7 +24,7 @@ end
 nr = ceil(1.5*n); nt = ceil(1.5*n); np = ceil(1.5*n); 
 [r,th,phi,w] = spherequad(nr,nt,np,c);
 [kx,ky,kz] = Sph2Cart(r,th,phi);
-V_nufft = finufft3d3(x,y,z,V(:),-1,1e-10,kx,ky,kz);
+V_nufft = finufft3d3(x,y,z,V(:),-1,1e-12,kx,ky,kz);
 
 a_lms = zeros(get_num_basis(L,S),1);
 basis_idx = 1;

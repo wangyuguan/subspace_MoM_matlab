@@ -81,6 +81,7 @@ for i=1:q
     Rot = elr2rot(alpha, beta, gamma);
     IR = get_2D_projection(A_lms_tns, L, S, base_mat, Rot, n_basis);
     M1 = M1 + w(i)*IR;
+    
 end
 
 
@@ -175,6 +176,7 @@ for i=1:q
     IR = get_2D_projection(A_lms_tns, L, S, base_mat, Rot, n_basis);
     IR = U3'*IR;
     m3 = m3 + w(i)*tns_kron(tns_kron(IR,IR),IR);
+
 end
 
 out.m3 = m3;

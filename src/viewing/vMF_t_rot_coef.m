@@ -22,9 +22,7 @@ for p=0:2*P
     end
 end
 b_pu = b_pu(idx_set);
-
 [~, complex_t_real] = get_view_real_t_complex(P);
-
 b_pu = complex_t_real*b_pu;
 b_pu = b_pu(2:end);
 
