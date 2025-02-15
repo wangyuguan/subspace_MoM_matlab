@@ -4,7 +4,7 @@ clc
 % test 
 
 addpath(genpath('../src'))
-addpath('/home/yuguanw/Dropbox/code/finufft/matlab')
+addpath('../../finufft/matlab/')
 
 
 
@@ -22,7 +22,7 @@ c = 0.5;
 N_basis = get_num_basis(L,S);
 vol_coef = vol_t_vol_coeffs(V_ds, L, S, c, 1);
 V_ds = vol_coeffs_t_vol(vol_coef, n, c, L, S, 1);
-V = vol_upsample(V_ds,D);
+
 
 
 %% generate viewing angles 
@@ -35,7 +35,7 @@ for i=1:n_vMF
 end
 w = ones(1,n_vMF)/n_vMF;
 view_coef = vMF_t_rot_coef(mus,w,k,P);
-Rots = reject_sampling_wigner(N, view_coef, P, 5);
+
 
 
 
@@ -44,22 +44,16 @@ params.s2 = 300;
 params.s3 = 100;
 params.r2_max = 300 ;
 params.r3_max = 100 ;
-params.tol2 = 1e-8;
+params.tol2 = 1e-10;
 params.tol3 = 1e-6;
 params.sigma = 0;
-params.nstd = get_estimated_std(V, SNR);
-params.augsize = 5;
-if use_precomputed_moments==true 
-    load('out.mat','out')
-else
-    params.n = n;
-    params.L = L;
-    params.S = S;
-    params.P = P;
-    params.sampling_size = 300;
-    % out = form_estimated_moments(V, n, Rots, params);
-    out =  coeffs_t_subspace_MoMs(vol_coef, view_coef, params);
-end
+params.n = n;
+params.L = L;
+params.S = S;
+params.P = P;
+params.sampling_size = 300;
+out =  coeffs_t_subspace_MoMs(vol_coef, view_coef, params);
+
 m1 = out.m1;
 m2 = out.m2;
 m3 = out.m3;
@@ -77,7 +71,7 @@ l3 = 1/norm(m3(:))^2;
 
 SO3_rules.m2 = get_SO3_rule(L,P,2,0);
 SO3_rules.m3 = get_SO3_rule(L,P,3,0);
-precomputation
+% precomputation
 [Phi_lms_nodes_MoMs, Psi_MoMs] = do_precomputations(L, S, P, out, n, c, SO3_rules);
 
 
@@ -114,6 +108,8 @@ x2 = x2_all{i};
 fun = @(x) find_cost_grad(x, m1, m2, m3, l1, l2, l3, Phi_lms_nodes_MoMs, Psi_MoMs, SO3_rules);
 x3 = fmincon(fun,x2,A,b,[],[],[],[],[],options);
 
+V3 = vol_coeffs_t_vol(x3(1:N_basis), n, c, L, S, 1);
+WriteMRC(V3,1,'V3.mrc')
 % % get resolutions 
 % run('~/aspire/initpath.m')
 % circ_mask = get_circ_mask(n);

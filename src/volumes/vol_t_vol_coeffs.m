@@ -38,6 +38,7 @@ for l=0:L
 
     for s=1:S(l+1)
         fls = fl(:,s);
+        fls(r>c) = 0;
         for m=-l:l
             Ylm = Yl(:,m+l+1);
             a_lms(basis_idx) = (w.*fls.*Ylm)'*V_nufft;
